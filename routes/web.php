@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\Admin\Automation\AutomatedPackageSuggesterController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DeleteOrderController;
 use App\Http\Controllers\Admin\EditOrderController;
@@ -73,6 +74,11 @@ Route::prefix('admin')->group(function () {
             Route::get('/{booking}/print', [PrintController::class, 'index'])->name('admin.orders.print');
             Route::post('/store', [CreatePaymentController::class, 'store'])->name('admin.payments.store');
             Route::delete('/{id}/destroy', [DeletePaymentController::class, 'destroy'])->name('admin.payments.destroy');
+        });
+
+        Route::prefix('automation')->group(function () {
+            Route::get('/suggester', [AutomatedPackageSuggesterController::class, 'index'])->name('admin.automation.suggester');
+            Route::get('/suggest', [AutomatedPackageSuggesterController::class, 'suggest'])->name('admin.automation.suggest');
         });
     });
 });
